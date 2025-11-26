@@ -25,15 +25,15 @@ Express.js API scraper untuk [manhwaindo.app](https://manhwaindo.app) dengan cac
 - ✅ **CORS Enabled** - Akses cross-origin
 - ✅ **Intelligent Caching** - 10 menit TTL
 - ✅ **Error Handling** - Robust error handling
-- ✅ **Serverless Ready** - Deployed di Netlify Functions
+- ✅ **Serverless Ready** - Deployed di Vercel atau Netlify Functions
 
 ## 🌐 Live Demo
 
-API sudah di-deploy di Netlify dan dapat diakses secara publik:
+API dapat di-deploy di Vercel atau Netlify:
 
-**Base URL:** https://apimanhwa.netlify.app
+**Base URL:** `https://your-project.vercel.app` atau `https://your-project.netlify.app`
 
-**Documentation:** https://apimanhwa.netlify.app (dengan live status monitoring)
+**Documentation:** Accessible at root path with API status monitoring
 
 ## 📦 Instalasi Lokal
 
@@ -55,12 +55,25 @@ npm run dev
 npm start
 ```
 
-## 🚀 Deployment ke Netlify
+## 🚀 Deployment
+
+### Deploy ke Vercel (Recommended)
+
+1. Push code ke GitHub
+2. Import repository ke Vercel
+3. Vercel akan otomatis deploy dengan konfigurasi `vercel.json`
+4. API akan tersedia di `https://your-project.vercel.app/api/*`
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ramadhanu27/Manhwaindo-API)
+
+### Deploy ke Netlify
 
 1. Push code ke GitHub
 2. Connect repository ke Netlify
 3. Netlify akan otomatis deploy dengan konfigurasi `netlify.toml`
 4. API akan tersedia di `https://your-site.netlify.app/api/*`
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ramadhanu27/Manhwaindo-API)
 
 ## 🔧 Konfigurasi
 
