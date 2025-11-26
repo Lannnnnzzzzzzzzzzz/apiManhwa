@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manhwaindo API - Interactive Documentation</title>
+    <title>Manhwaindo API Documentation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -16,8 +16,8 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0e1a;
-            color: #e4e6eb;
+            background: #0f172a;
+            color: #e2e8f0;
             line-height: 1.6;
         }
 
@@ -26,86 +26,149 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #1a1f2e;
+            background: #1e293b;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #2d3548;
+            background: #334155;
             border-radius: 4px;
         }
 
-        header {
-            background: #111827;
-            border-bottom: 1px solid #1f2937;
-            padding: 1.5rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .layout {
+            display: flex;
+            height: 100vh;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .sidebar {
+            width: 280px;
+            background: #1e293b;
+            border-right: 1px solid #334155;
+            overflow-y: auto;
+            flex-shrink: 0;
         }
 
-        h1 {
-            font-size: 1.75rem;
+        .sidebar-header {
+            padding: 1.5rem;
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
             font-weight: 700;
             color: #06b6d4;
+            margin-bottom: 0.25rem;
         }
 
-        .subtitle {
+        .sidebar-subtitle {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .menu {
+            padding: 0.5rem 0;
+        }
+
+        .menu-section {
+            padding: 1rem 0;
+        }
+
+        .menu-section-title {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1.5rem;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
             font-size: 0.875rem;
-            color: #9ca3af;
-            margin-top: 0.25rem;
         }
 
-        .main-content {
-            padding: 2rem 0;
+        .menu-item:hover {
+            background: #334155;
+            color: #f1f5f9;
         }
 
-        .section {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
+        .menu-item.active {
+            background: #0369a1;
+            color: #ffffff;
+            border-left-color: #06b6d4;
+            font-weight: 500;
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .content-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-description {
+            font-size: 0.95rem;
+            color: #94a3b8;
+        }
+
+        .endpoint-info {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .section-header {
+        .endpoint-url {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 1rem;
             margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #1f2937;
         }
 
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #f9fafb;
-        }
-
-        .endpoint-badge {
-            display: inline-block;
+        .method-badge {
             padding: 0.25rem 0.75rem;
             background: #065f46;
             color: #6ee7b7;
             border-radius: 6px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             font-family: monospace;
         }
 
-        .endpoint-description {
-            color: #9ca3af;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
+        .url-path {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #06b6d4;
+            flex: 1;
         }
 
-        .params-grid {
+        .params-section {
+            margin-top: 1.5rem;
+        }
+
+        .params-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 0.75rem;
+        }
+
+        .param-group {
             display: grid;
             gap: 0.75rem;
             margin-bottom: 1rem;
@@ -113,23 +176,21 @@
 
         .param-row {
             display: grid;
-            grid-template-columns: 150px 1fr 100px;
+            grid-template-columns: 120px 1fr auto;
             gap: 0.75rem;
             align-items: center;
         }
 
         .param-label {
             font-size: 0.875rem;
-            color: #d1d5db;
-            font-weight: 500;
+            color: #cbd5e1;
         }
 
         .param-input {
-            width: 100%;
             padding: 0.5rem 0.75rem;
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: #e4e6eb;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
             border-radius: 6px;
             font-size: 0.875rem;
         }
@@ -139,25 +200,20 @@
             border-color: #06b6d4;
         }
 
-        .param-input::placeholder {
-            color: #6b7280;
-        }
-
         .btn {
-            padding: 0.5rem 1.25rem;
-            background: #06b6d4;
-            color: #fff;
+            padding: 0.5rem 1.5rem;
+            background: #0284c7;
+            color: #ffffff;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.875rem;
             transition: all 0.2s;
-            white-space: nowrap;
         }
 
         .btn:hover {
-            background: #0891b2;
+            background: #0369a1;
         }
 
         .btn:disabled {
@@ -165,16 +221,42 @@
             cursor: not-allowed;
         }
 
+        .quick-tests {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .quick-test-btn {
+            padding: 0.35rem 0.75rem;
+            background: #334155;
+            color: #cbd5e1;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .quick-test-btn:hover {
+            background: #475569;
+            color: #f1f5f9;
+        }
+
+        .response-section {
+            margin-top: 2rem;
+        }
+
         .response-container {
-            margin-top: 1rem;
-            background: #0a0e1a;
-            border: 1px solid #1f2937;
+            background: #1e293b;
+            border: 1px solid #334155;
             border-radius: 8px;
             overflow: hidden;
         }
 
         .response-header {
-            background: #1f2937;
+            background: #334155;
             padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
@@ -184,13 +266,13 @@
         .response-title {
             font-size: 0.875rem;
             font-weight: 600;
-            color: #9ca3af;
+            color: #cbd5e1;
         }
 
-        .copy-json-btn {
+        .copy-btn {
             padding: 0.25rem 0.75rem;
-            background: #374151;
-            color: #9ca3af;
+            background: #475569;
+            color: #cbd5e1;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -198,9 +280,8 @@
             transition: all 0.2s;
         }
 
-        .copy-json-btn:hover {
-            background: #4b5563;
-            color: #f9fafb;
+        .copy-btn:hover {
+            background: #64748b;
         }
 
         .response-body {
@@ -212,41 +293,31 @@
         .json-viewer {
             font-family: 'Courier New', monospace;
             font-size: 0.8rem;
-            color: #d1d5db;
+            color: #cbd5e1;
             white-space: pre-wrap;
             word-wrap: break-word;
         }
 
-        .loading-inline {
-            color: #06b6d4;
-            font-size: 0.875rem;
+        .loading {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            color: #06b6d4;
+            font-size: 0.875rem;
         }
 
-        .spinner-small {
-            border: 2px solid #1f2937;
+        .spinner {
+            border: 2px solid #334155;
             border-top: 2px solid #06b6d4;
             border-radius: 50%;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        .error-message {
-            background: #7f1d1d;
-            border: 1px solid #991b1b;
-            color: #fca5a5;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            margin-top: 1rem;
         }
 
         .success-message {
@@ -256,36 +327,47 @@
             padding: 0.75rem 1rem;
             border-radius: 6px;
             font-size: 0.875rem;
-            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            background: #7f1d1d;
+            border: 1px solid #991b1b;
+            color: #fca5a5;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .visual-preview {
+            margin-top: 1.5rem;
         }
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 1rem;
-            margin-top: 1rem;
         }
 
         .manhwa-card {
-            background: #1f2937;
-            border: 1px solid #374151;
+            background: #1e293b;
+            border: 1px solid #334155;
             border-radius: 8px;
             overflow: hidden;
             transition: all 0.2s;
-            cursor: pointer;
         }
 
         .manhwa-card:hover {
             border-color: #06b6d4;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.15);
         }
 
         .manhwa-card-image {
             width: 100%;
             aspect-ratio: 2/3;
             object-fit: cover;
-            background: #374151;
+            background: #334155;
         }
 
         .manhwa-card-content {
@@ -293,64 +375,55 @@
         }
 
         .manhwa-card-title {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: #f9fafb;
+            color: #f1f5f9;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            min-height: 2.4rem;
+            min-height: 2rem;
         }
 
         .manhwa-card-chapter {
-            font-size: 0.7rem;
-            color: #9ca3af;
+            font-size: 0.65rem;
+            color: #94a3b8;
             margin-top: 0.25rem;
         }
 
         .chapter-list {
             display: grid;
             gap: 0.5rem;
-            margin-top: 1rem;
         }
 
         .chapter-item {
-            background: #1f2937;
+            background: #0f172a;
             padding: 0.75rem 1rem;
             border-radius: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .chapter-item:hover {
-            background: #374151;
         }
 
         .chapter-title {
             font-size: 0.875rem;
-            color: #e4e6eb;
+            color: #cbd5e1;
         }
 
         .chapter-date {
             font-size: 0.75rem;
-            color: #6b7280;
+            color: #64748b;
         }
 
         .image-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 1rem;
+            display: grid;
+            gap: 0.5rem;
         }
 
         .image-item {
-            background: #1f2937;
-            border: 1px solid #374151;
+            background: #0f172a;
+            border: 1px solid #334155;
             border-radius: 6px;
             padding: 0.75rem 1rem;
             display: flex;
@@ -362,58 +435,58 @@
         .image-number {
             font-weight: 600;
             color: #06b6d4;
-            margin-bottom: 0.25rem;
             font-size: 0.875rem;
+            margin-bottom: 0.25rem;
         }
 
         .image-url {
             font-size: 0.7rem;
-            color: #6b7280;
+            color: #64748b;
             word-break: break-all;
             font-family: monospace;
         }
 
-        .url-display {
-            background: #0a0e1a;
-            padding: 0.75rem;
-            border-radius: 6px;
-            border: 1px solid #1f2937;
-            margin-top: 1rem;
-        }
-
-        .url-text {
-            font-family: monospace;
-            font-size: 0.875rem;
-            color: #06b6d4;
-            word-break: break-all;
-        }
-
-        .quick-test {
+        .series-detail {
             display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .quick-test-btn {
-            padding: 0.4rem 0.75rem;
-            background: #374151;
-            color: #9ca3af;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            transition: all 0.2s;
+        .series-image {
+            width: 180px;
+            height: 270px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
         }
 
-        .quick-test-btn:hover {
-            background: #4b5563;
-            color: #f9fafb;
+        .series-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .series-meta {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .series-synopsis {
+            color: #cbd5e1;
+            font-size: 0.875rem;
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #334155;
+            }
+
+            .layout {
+                flex-direction: column;
             }
 
             .param-row {
@@ -421,260 +494,381 @@
             }
 
             .card-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
 
-            h1 {
-                font-size: 1.25rem;
+            .series-detail {
+                flex-direction: column;
+            }
+
+            .series-image {
+                width: 100%;
+                max-width: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Manhwaindo API - Interactive Documentation</h1>
-            <p class="subtitle">Test all endpoints directly in your browser</p>
-        </div>
-    </header>
+    <div class="layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Manhwaindo API</div>
+                <div class="sidebar-subtitle">Interactive Documentation</div>
+            </div>
 
-    <main class="main-content">
-        <div class="container">
-
-            <!-- Popular Manhwa -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Popular Manhwa</h2>
-                        <span class="endpoint-badge">GET /api/popular</span>
-                    </div>
+            <div class="menu">
+                <div class="menu-section">
+                    <div class="menu-section-title">Getting Started</div>
+                    <div class="menu-item active" onclick="showContent('home')">Home</div>
+                    <div class="menu-item" onclick="showContent('popular')">Popular Manhwa</div>
+                    <div class="menu-item" onclick="showContent('lastupdate')">Latest Update</div>
+                    <div class="menu-item" onclick="showContent('project')">Project Update</div>
+                    <div class="menu-item" onclick="showContent('series-list')">All Series</div>
                 </div>
-                <p class="endpoint-description">Mengambil daftar manhwa/manga yang sedang populer</p>
 
-                <button class="btn" onclick="testEndpoint('popular')">Test Endpoint</button>
+                <div class="menu-section">
+                    <div class="menu-section-title">Search & Details</div>
+                    <div class="menu-item" onclick="showContent('search')">Search Manhwa</div>
+                    <div class="menu-item" onclick="showContent('series')">Series Detail</div>
+                    <div class="menu-item" onclick="showContent('chapter')">Chapter Detail</div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-section-title">Downloads</div>
+                    <div class="menu-item" onclick="showContent('download')">Download Chapter</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content" id="mainContent">
+            <!-- Home Page -->
+            <div id="content-home" class="content-page">
+                <div class="content-header">
+                    <h1 class="content-title">Manhwaindo API Documentation</h1>
+                    <p class="content-description">Welcome to the interactive API documentation. Select an endpoint from the sidebar to test it directly in your browser.</p>
+                </div>
+
+                <div class="endpoint-info">
+                    <h3 style="margin-bottom: 1rem; color: #06b6d4;">Available Endpoints</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #334155;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/popular</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #334155;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/lastupdate</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #334155;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/project</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #334155;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/series-list</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #334155;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/search?q={query}</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #334155;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/series/{slug}</span>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #334155;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/chapter/{slug}</span>
+                        </li>
+                        <li style="padding: 0.5rem 0;">
+                            <span class="method-badge">GET</span>
+                            <span style="margin-left: 1rem; font-family: monospace; color: #cbd5e1;">/api/download/{slug}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Popular Manhwa Page -->
+            <div id="content-popular" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">Popular Manhwa</h1>
+                    <p class="content-description">Get a list of popular manhwa/manga currently trending.</p>
+                </div>
+
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/popular</span>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.875rem;">No parameters required.</p>
+                    <button class="btn" onclick="testEndpoint('popular')" style="margin-top: 1rem;">Test Endpoint</button>
+                </div>
 
                 <div id="response-popular"></div>
             </div>
 
-            <!-- Latest Update -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Latest Update</h2>
-                        <span class="endpoint-badge">GET /api/lastupdate</span>
-                    </div>
-                </div>
-                <p class="endpoint-description">Mengambil daftar manhwa/manga dengan update terbaru</p>
-
-                <div class="params-grid">
-                    <div class="param-row">
-                        <label class="param-label">Page (optional)</label>
-                        <input type="number" class="param-input" id="lastupdate-page" placeholder="1" value="1" min="1">
-                        <button class="btn" onclick="testEndpoint('lastupdate')">Test</button>
-                    </div>
+            <!-- Latest Update Page -->
+            <div id="content-lastupdate" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">Latest Update</h1>
+                    <p class="content-description">Get the latest updated manhwa/manga with pagination support.</p>
                 </div>
 
-                <div class="quick-test">
-                    <button class="quick-test-btn" onclick="quickTest('lastupdate', 1)">Page 1</button>
-                    <button class="quick-test-btn" onclick="quickTest('lastupdate', 2)">Page 2</button>
-                    <button class="quick-test-btn" onclick="quickTest('lastupdate', 3)">Page 3</button>
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/lastupdate</span>
+                    </div>
+
+                    <div class="params-section">
+                        <div class="params-title">Parameters (Optional)</div>
+                        <div class="param-group">
+                            <div class="param-row">
+                                <label class="param-label">Page</label>
+                                <input type="number" class="param-input" id="lastupdate-page" placeholder="1" value="1" min="1">
+                                <button class="btn" onclick="testEndpoint('lastupdate')">Test</button>
+                            </div>
+                        </div>
+                        <div class="quick-tests">
+                            <button class="quick-test-btn" onclick="quickTest('lastupdate', 1)">Page 1</button>
+                            <button class="quick-test-btn" onclick="quickTest('lastupdate', 2)">Page 2</button>
+                            <button class="quick-test-btn" onclick="quickTest('lastupdate', 3)">Page 3</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="response-lastupdate"></div>
             </div>
 
-            <!-- Project Update -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Project Update</h2>
-                        <span class="endpoint-badge">GET /api/project</span>
-                    </div>
-                </div>
-                <p class="endpoint-description">Mengambil daftar project manhwa/manga yang sedang dikerjakan</p>
-
-                <div class="params-grid">
-                    <div class="param-row">
-                        <label class="param-label">Page (optional)</label>
-                        <input type="number" class="param-input" id="project-page" placeholder="1" value="1" min="1">
-                        <button class="btn" onclick="testEndpoint('project')">Test</button>
-                    </div>
+            <!-- Project Update Page -->
+            <div id="content-project" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">Project Update</h1>
+                    <p class="content-description">Get the list of project manhwa/manga currently being worked on.</p>
                 </div>
 
-                <div class="quick-test">
-                    <button class="quick-test-btn" onclick="quickTest('project', 1)">Page 1</button>
-                    <button class="quick-test-btn" onclick="quickTest('project', 2)">Page 2</button>
-                    <button class="quick-test-btn" onclick="quickTest('project', 3)">Page 3</button>
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/project</span>
+                    </div>
+
+                    <div class="params-section">
+                        <div class="params-title">Parameters (Optional)</div>
+                        <div class="param-group">
+                            <div class="param-row">
+                                <label class="param-label">Page</label>
+                                <input type="number" class="param-input" id="project-page" placeholder="1" value="1" min="1">
+                                <button class="btn" onclick="testEndpoint('project')">Test</button>
+                            </div>
+                        </div>
+                        <div class="quick-tests">
+                            <button class="quick-test-btn" onclick="quickTest('project', 1)">Page 1</button>
+                            <button class="quick-test-btn" onclick="quickTest('project', 2)">Page 2</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="response-project"></div>
             </div>
 
-            <!-- Series List -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">All Series</h2>
-                        <span class="endpoint-badge">GET /api/series-list</span>
-                    </div>
-                </div>
-                <p class="endpoint-description">Mengambil daftar semua series manhwa/manga yang tersedia</p>
-
-                <div class="params-grid">
-                    <div class="param-row">
-                        <label class="param-label">Page (optional)</label>
-                        <input type="number" class="param-input" id="series-list-page" placeholder="1" value="1" min="1">
-                        <button class="btn" onclick="testEndpoint('series-list')">Test</button>
-                    </div>
+            <!-- Series List Page -->
+            <div id="content-series-list" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">All Series</h1>
+                    <p class="content-description">Get a complete list of all available manhwa/manga series.</p>
                 </div>
 
-                <div class="quick-test">
-                    <button class="quick-test-btn" onclick="quickTest('series-list', 1)">Page 1</button>
-                    <button class="quick-test-btn" onclick="quickTest('series-list', 2)">Page 2</button>
-                    <button class="quick-test-btn" onclick="quickTest('series-list', 3)">Page 3</button>
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/series-list</span>
+                    </div>
+
+                    <div class="params-section">
+                        <div class="params-title">Parameters (Optional)</div>
+                        <div class="param-group">
+                            <div class="param-row">
+                                <label class="param-label">Page</label>
+                                <input type="number" class="param-input" id="series-list-page" placeholder="1" value="1" min="1">
+                                <button class="btn" onclick="testEndpoint('series-list')">Test</button>
+                            </div>
+                        </div>
+                        <div class="quick-tests">
+                            <button class="quick-test-btn" onclick="quickTest('series-list', 1)">Page 1</button>
+                            <button class="quick-test-btn" onclick="quickTest('series-list', 2)">Page 2</button>
+                            <button class="quick-test-btn" onclick="quickTest('series-list', 3)">Page 3</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="response-series-list"></div>
             </div>
 
-            <!-- Search -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Search</h2>
-                        <span class="endpoint-badge">GET /api/search</span>
-                    </div>
-                </div>
-                <p class="endpoint-description">Mencari manhwa/manga berdasarkan kata kunci</p>
-
-                <div class="params-grid">
-                    <div class="param-row">
-                        <label class="param-label">Query (required)</label>
-                        <input type="text" class="param-input" id="search-q" placeholder="solo leveling">
-                        <button class="btn" onclick="testEndpoint('search')">Test</button>
-                    </div>
+            <!-- Search Page -->
+            <div id="content-search" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">Search Manhwa</h1>
+                    <p class="content-description">Search for manhwa/manga by title or keywords.</p>
                 </div>
 
-                <div class="quick-test">
-                    <button class="quick-test-btn" onclick="quickTestSearch('solo leveling')">Solo Leveling</button>
-                    <button class="quick-test-btn" onclick="quickTestSearch('tower of god')">Tower of God</button>
-                    <button class="quick-test-btn" onclick="quickTestSearch('one piece')">One Piece</button>
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/search</span>
+                    </div>
+
+                    <div class="params-section">
+                        <div class="params-title">Parameters (Required)</div>
+                        <div class="param-group">
+                            <div class="param-row">
+                                <label class="param-label">Query (q)</label>
+                                <input type="text" class="param-input" id="search-q" placeholder="solo leveling">
+                                <button class="btn" onclick="testEndpoint('search')">Test</button>
+                            </div>
+                        </div>
+                        <div class="quick-tests">
+                            <button class="quick-test-btn" onclick="quickTestSearch('solo leveling')">Solo Leveling</button>
+                            <button class="quick-test-btn" onclick="quickTestSearch('tower of god')">Tower of God</button>
+                            <button class="quick-test-btn" onclick="quickTestSearch('one piece')">One Piece</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="response-search"></div>
             </div>
 
-            <!-- Series Detail -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Series Detail</h2>
-                        <span class="endpoint-badge">GET /api/series/:slug</span>
-                    </div>
-                </div>
-                <p class="endpoint-description">Mengambil detail lengkap dari series tertentu beserta daftar chapter</p>
-
-                <div class="params-grid">
-                    <div class="param-row">
-                        <label class="param-label">Slug (required)</label>
-                        <input type="text" class="param-input" id="series-slug" placeholder="solo-leveling">
-                        <button class="btn" onclick="testEndpoint('series')">Test</button>
-                    </div>
+            <!-- Series Detail Page -->
+            <div id="content-series" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">Series Detail</h1>
+                    <p class="content-description">Get detailed information about a specific series including all chapters.</p>
                 </div>
 
-                <div class="quick-test">
-                    <button class="quick-test-btn" onclick="quickTestSeries('solo-leveling')">Solo Leveling</button>
-                    <button class="quick-test-btn" onclick="quickTestSeries('tower-of-god')">Tower of God</button>
-                    <button class="quick-test-btn" onclick="quickTestSeries('one-piece')">One Piece</button>
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/series/{slug}</span>
+                    </div>
+
+                    <div class="params-section">
+                        <div class="params-title">Parameters (Required)</div>
+                        <div class="param-group">
+                            <div class="param-row">
+                                <label class="param-label">Slug</label>
+                                <input type="text" class="param-input" id="series-slug" placeholder="solo-leveling">
+                                <button class="btn" onclick="testEndpoint('series')">Test</button>
+                            </div>
+                        </div>
+                        <div class="quick-tests">
+                            <button class="quick-test-btn" onclick="quickTestSeries('solo-leveling')">Solo Leveling</button>
+                            <button class="quick-test-btn" onclick="quickTestSeries('tower-of-god')">Tower of God</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="response-series"></div>
             </div>
 
-            <!-- Chapter Detail -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Chapter Detail</h2>
-                        <span class="endpoint-badge">GET /api/chapter/:slug</span>
-                    </div>
-                </div>
-                <p class="endpoint-description">Mengambil detail chapter dan URL gambar dari chapter tertentu</p>
-
-                <div class="params-grid">
-                    <div class="param-row">
-                        <label class="param-label">Slug (required)</label>
-                        <input type="text" class="param-input" id="chapter-slug" placeholder="solo-leveling-chapter-1">
-                        <button class="btn" onclick="testEndpoint('chapter')">Test</button>
-                    </div>
+            <!-- Chapter Detail Page -->
+            <div id="content-chapter" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">Chapter Detail</h1>
+                    <p class="content-description">Get chapter details including all image URLs.</p>
                 </div>
 
-                <div class="quick-test">
-                    <button class="quick-test-btn" onclick="quickTestChapter('solo-leveling-chapter-1')">Solo Leveling Ch.1</button>
-                    <button class="quick-test-btn" onclick="quickTestChapter('tower-of-god-chapter-1')">Tower of God Ch.1</button>
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/chapter/{slug}</span>
+                    </div>
+
+                    <div class="params-section">
+                        <div class="params-title">Parameters (Required)</div>
+                        <div class="param-group">
+                            <div class="param-row">
+                                <label class="param-label">Slug</label>
+                                <input type="text" class="param-input" id="chapter-slug" placeholder="solo-leveling-chapter-1">
+                                <button class="btn" onclick="testEndpoint('chapter')">Test</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="response-chapter"></div>
             </div>
 
-            <!-- Download Chapter -->
-            <div class="section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Download Chapter</h2>
-                        <span class="endpoint-badge">GET /api/download/:slug</span>
-                    </div>
+            <!-- Download Page -->
+            <div id="content-download" class="content-page" style="display: none;">
+                <div class="content-header">
+                    <h1 class="content-title">Download Chapter</h1>
+                    <p class="content-description">Download a chapter as ZIP or PDF format.</p>
                 </div>
-                <p class="endpoint-description">Download chapter dalam format ZIP atau PDF</p>
 
-                <div class="params-grid">
-                    <div class="param-row">
-                        <label class="param-label">Slug (required)</label>
-                        <input type="text" class="param-input" id="download-slug" placeholder="solo-leveling-chapter-1">
-                        <button class="btn" onclick="testEndpoint('download')">Get URL</button>
+                <div class="endpoint-info">
+                    <div class="endpoint-url">
+                        <span class="method-badge">GET</span>
+                        <span class="url-path">/api/download/{slug}</span>
                     </div>
-                    <div class="param-row">
-                        <label class="param-label">Format</label>
-                        <select class="param-input" id="download-format">
-                            <option value="zip">ZIP</option>
-                            <option value="pdf">PDF</option>
-                        </select>
+
+                    <div class="params-section">
+                        <div class="params-title">Parameters</div>
+                        <div class="param-group">
+                            <div class="param-row">
+                                <label class="param-label">Slug</label>
+                                <input type="text" class="param-input" id="download-slug" placeholder="solo-leveling-chapter-1">
+                            </div>
+                            <div class="param-row">
+                                <label class="param-label">Format</label>
+                                <select class="param-input" id="download-format">
+                                    <option value="zip">ZIP</option>
+                                    <option value="pdf">PDF</option>
+                                </select>
+                                <button class="btn" onclick="testEndpoint('download')">Get URL</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div id="response-download"></div>
             </div>
-
         </div>
-    </main>
+    </div>
 
     <script>
+        function showContent(page) {
+            document.querySelectorAll('.content-page').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+
+            const contentEl = document.getElementById(`content-${page}`);
+            if (contentEl) {
+                contentEl.style.display = 'block';
+            }
+
+            event.target.classList.add('active');
+        }
+
         async function testEndpoint(type) {
             const responseDiv = document.getElementById(`response-${type}`);
-
             let url = '';
-            let params = {};
 
             switch(type) {
                 case 'popular':
                     url = '/api/popular';
                     break;
-
                 case 'lastupdate':
                     const page1 = document.getElementById('lastupdate-page').value;
                     url = `/api/lastupdate${page1 ? `?page=${page1}` : ''}`;
                     break;
-
                 case 'project':
                     const page2 = document.getElementById('project-page').value;
                     url = `/api/project${page2 ? `?page=${page2}` : ''}`;
                     break;
-
                 case 'series-list':
                     const page3 = document.getElementById('series-list-page').value;
                     url = `/api/series-list${page3 ? `?page=${page3}` : ''}`;
                     break;
-
                 case 'search':
                     const query = document.getElementById('search-q').value;
                     if (!query) {
@@ -683,7 +877,6 @@
                     }
                     url = `/api/search?q=${encodeURIComponent(query)}`;
                     break;
-
                 case 'series':
                     const slug = document.getElementById('series-slug').value;
                     if (!slug) {
@@ -692,7 +885,6 @@
                     }
                     url = `/api/series/${slug}`;
                     break;
-
                 case 'chapter':
                     const chSlug = document.getElementById('chapter-slug').value;
                     if (!chSlug) {
@@ -701,7 +893,6 @@
                     }
                     url = `/api/chapter/${chSlug}`;
                     break;
-
                 case 'download':
                     const dlSlug = document.getElementById('download-slug').value;
                     const format = document.getElementById('download-format').value;
@@ -745,44 +936,42 @@
             testEndpoint('series');
         }
 
-        function quickTestChapter(slug) {
-            document.getElementById('chapter-slug').value = slug;
-            testEndpoint('chapter');
-        }
-
         function showLoading(container) {
             container.innerHTML = `
-                <div class="loading-inline" style="margin-top: 1rem;">
-                    <div class="spinner-small"></div>
-                    <span>Loading...</span>
+                <div class="response-section">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <span>Loading...</span>
+                    </div>
                 </div>
             `;
         }
 
         function showError(container, message) {
             container.innerHTML = `
-                <div class="error-message">
-                    <strong>Error:</strong> ${message}
+                <div class="response-section">
+                    <div class="error-message">
+                        <strong>Error:</strong> ${message}
+                    </div>
                 </div>
             `;
         }
 
         function showSuccess(container, data, type) {
-            let html = '';
+            let html = '<div class="response-section">';
+            html += '<div class="success-message">✓ Request successful</div>';
 
-            // Visual preview for certain endpoints
             if (['popular', 'lastupdate', 'project', 'series-list', 'search'].includes(type)) {
                 const items = data.data || [];
                 if (items.length > 0) {
-                    html += '<div class="success-message">✓ Request successful - Showing visual preview + JSON</div>';
-                    html += '<div class="card-grid">';
+                    html += '<div class="visual-preview"><div class="card-grid">';
                     items.slice(0, 12).forEach(item => {
                         html += `
                             <div class="manhwa-card">
-                                <img src="${item.image || 'https://via.placeholder.com/160x240?text=No+Image'}"
+                                <img src="${item.image || ''}"
                                      alt="${item.title}"
                                      class="manhwa-card-image"
-                                     onerror="this.src='https://via.placeholder.com/160x240?text=No+Image'">
+                                     onerror="this.src='https://via.placeholder.com/140x210?text=No+Image'">
                                 <div class="manhwa-card-content">
                                     <div class="manhwa-card-title">${item.title || 'No Title'}</div>
                                     ${item.latestChapter ? `<div class="manhwa-card-chapter">${item.latestChapter}</div>` : ''}
@@ -790,25 +979,22 @@
                             </div>
                         `;
                     });
-                    html += '</div>';
+                    html += '</div></div>';
                 }
             } else if (type === 'series') {
                 const series = data.data;
-                html += '<div class="success-message">✓ Request successful - Showing series info + chapters</div>';
                 html += `
-                    <div style="margin-top: 1rem;">
-                        <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
-                            <img src="${series.image}" style="width: 200px; height: 300px; object-fit: cover; border-radius: 8px;">
-                            <div>
-                                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">${series.title}</h3>
-                                <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 0.5rem;">
-                                    ${series.type || ''} • ${series.status || ''} ${series.rating ? `• ★ ${series.rating}` : ''}
-                                </p>
-                                <p style="color: #d1d5db; font-size: 0.875rem;">${series.synopsis || ''}</p>
+                    <div class="visual-preview">
+                        <div class="series-detail">
+                            <img src="${series.image}" class="series-image" onerror="this.src='https://via.placeholder.com/180x270?text=No+Image'">
+                            <div class="series-info">
+                                <h3>${series.title}</h3>
+                                <div class="series-meta">${series.type || ''} • ${series.status || ''} ${series.rating ? `• ★ ${series.rating}` : ''}</div>
+                                <div class="series-synopsis">${series.synopsis || ''}</div>
                             </div>
                         </div>
                         ${series.chapters && series.chapters.length > 0 ? `
-                            <h4 style="margin-bottom: 0.75rem; color: #f9fafb;">Chapters (${series.totalChapters || series.chapters.length})</h4>
+                            <h4 style="margin-bottom: 0.75rem;">Chapters (${series.totalChapters || series.chapters.length})</h4>
                             <div class="chapter-list">
                                 ${series.chapters.slice(0, 10).map(ch => `
                                     <div class="chapter-item">
@@ -816,16 +1002,14 @@
                                         ${ch.releaseDate ? `<span class="chapter-date">${ch.releaseDate}</span>` : ''}
                                     </div>
                                 `).join('')}
-                                ${series.chapters.length > 10 ? `<p style="text-align: center; color: #6b7280; margin-top: 0.5rem;">... and ${series.chapters.length - 10} more chapters</p>` : ''}
                             </div>
                         ` : ''}
                     </div>
                 `;
             } else if (type === 'chapter') {
                 const chapter = data.data;
-                html += '<div class="success-message">✓ Request successful - Showing image URLs</div>';
                 if (chapter.images && chapter.images.length > 0) {
-                    html += '<div class="image-list">';
+                    html += '<div class="visual-preview"><div class="image-list">';
                     chapter.images.forEach((img, idx) => {
                         html += `
                             <div class="image-item">
@@ -833,26 +1017,26 @@
                                     <div class="image-number">Image ${idx + 1}</div>
                                     <div class="image-url">${img}</div>
                                 </div>
-                                <button class="copy-json-btn" onclick="copyText('${img.replace(/'/g, "\\'")}')">Copy</button>
+                                <button class="copy-btn" onclick="copyText('${img.replace(/'/g, "\\'")}')">Copy</button>
                             </div>
                         `;
                     });
-                    html += '</div>';
+                    html += '</div></div>';
                 }
             }
 
-            // JSON Response
             html += `
-                <div class="response-container" style="margin-top: 1rem;">
+                <div class="response-container" style="margin-top: 1.5rem;">
                     <div class="response-header">
                         <span class="response-title">JSON Response</span>
-                        <button class="copy-json-btn" onclick="copyJSON(${JSON.stringify(JSON.stringify(data))})">Copy JSON</button>
+                        <button class="copy-btn" onclick="copyJSON(${JSON.stringify(JSON.stringify(data))})">Copy JSON</button>
                     </div>
                     <div class="response-body">
                         <pre class="json-viewer">${JSON.stringify(data, null, 2)}</pre>
                     </div>
                 </div>
             `;
+            html += '</div>';
 
             container.innerHTML = html;
         }
@@ -860,17 +1044,19 @@
         function showDownloadUrl(container, url) {
             const fullUrl = window.location.origin + url;
             container.innerHTML = `
-                <div class="success-message">✓ Download URL generated</div>
-                <div class="url-display">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <span style="font-size: 0.875rem; color: #9ca3af; font-weight: 600;">Download URL:</span>
-                        <button class="copy-json-btn" onclick="copyText('${fullUrl}')">Copy URL</button>
+                <div class="response-section">
+                    <div class="success-message">✓ Download URL generated</div>
+                    <div class="endpoint-info">
+                        <p style="margin-bottom: 0.5rem; color: #94a3b8;">Download URL:</p>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <input type="text" value="${fullUrl}" readonly style="flex: 1; padding: 0.5rem; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #cbd5e1; font-family: monospace; font-size: 0.875rem;">
+                            <button class="copy-btn" onclick="copyText('${fullUrl}')">Copy</button>
+                        </div>
+                        <p style="margin-top: 0.75rem; font-size: 0.875rem; color: #64748b;">
+                            Click the URL or open it in a new tab to start the download.
+                        </p>
                     </div>
-                    <div class="url-text">${fullUrl}</div>
                 </div>
-                <p style="margin-top: 1rem; font-size: 0.875rem; color: #9ca3af;">
-                    Click the URL above or paste it in a new tab to start the download
-                </p>
             `;
         }
 
