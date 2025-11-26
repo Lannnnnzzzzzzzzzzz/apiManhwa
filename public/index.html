@@ -356,11 +356,13 @@
             border-radius: 8px;
             overflow: hidden;
             transition: all 0.2s;
+            cursor: pointer;
         }
 
         .manhwa-card:hover {
             border-color: #06b6d4;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
         }
 
         .manhwa-card-image {
@@ -404,6 +406,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-item:hover {
+            background: #1e293b;
+            border-color: #06b6d4;
         }
 
         .chapter-title {
@@ -966,8 +976,9 @@
                 if (items.length > 0) {
                     html += '<div class="visual-preview"><div class="card-grid">';
                     items.slice(0, 12).forEach(item => {
+                        const slug = item.slug || '';
                         html += `
-                            <div class="manhwa-card">
+                            <div class="manhwa-card" onclick="navigateToSeries('${slug}')">
                                 <img src="${item.image || ''}"
                                      alt="${item.title}"
                                      class="manhwa-card-image"
@@ -996,12 +1007,15 @@
                         ${series.chapters && series.chapters.length > 0 ? `
                             <h4 style="margin-bottom: 0.75rem;">Chapters (${series.totalChapters || series.chapters.length})</h4>
                             <div class="chapter-list">
-                                ${series.chapters.slice(0, 10).map(ch => `
-                                    <div class="chapter-item">
-                                        <span class="chapter-title">${ch.title}</span>
-                                        ${ch.releaseDate ? `<span class="chapter-date">${ch.releaseDate}</span>` : ''}
-                                    </div>
-                                `).join('')}
+                                ${series.chapters.map(ch => {
+                                    const chSlug = ch.slug ? ch.slug.replace(/\/$/, '') : '';
+                                    return `
+                                        <div class="chapter-item" onclick="navigateToChapter('${chSlug}')">
+                                            <span class="chapter-title">${ch.title}</span>
+                                            ${ch.releaseDate ? `<span class="chapter-date">${ch.releaseDate}</span>` : ''}
+                                        </div>
+                                    `;
+                                }).join('')}
                             </div>
                         ` : ''}
                     </div>
@@ -1039,6 +1053,22 @@
             html += '</div>';
 
             container.innerHTML = html;
+        }
+
+        function navigateToSeries(slug) {
+            if (!slug) return;
+
+            showContent('series');
+            document.getElementById('series-slug').value = slug;
+            testEndpoint('series');
+        }
+
+        function navigateToChapter(slug) {
+            if (!slug) return;
+
+            showContent('chapter');
+            document.getElementById('chapter-slug').value = slug;
+            testEndpoint('chapter');
         }
 
         function showDownloadUrl(container, url) {
