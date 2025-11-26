@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manhwaindo API - Documentation</title>
+    <title>Manhwaindo API Documentation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: #0a0e1a;
             color: #e4e6eb;
             line-height: 1.6;
@@ -23,7 +23,6 @@
 
         ::-webkit-scrollbar {
             width: 8px;
-            height: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -35,18 +34,10 @@
             border-radius: 4px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3d4557;
-        }
-
         header {
             background: #111827;
             border-bottom: 1px solid #1f2937;
             padding: 1.5rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
         }
 
         .container {
@@ -55,600 +46,742 @@
             padding: 0 2rem;
         }
 
-        .header-content {
+        .controls {
             display: flex;
-            justify-content: space-between;
+            gap: 1rem;
             align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .dropdown-wrapper {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: #e4e6eb;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.75rem;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: #e4e6eb;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .search-input::placeholder {
+            color: #6b7280;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background: #06b6d4;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background: #0891b2;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
             color: #60a5fa;
         }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #065f46;
-            color: #10b981;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
+        .spinner {
+            border: 3px solid #1f2937;
+            border-top: 3px solid #06b6d4;
             border-radius: 50%;
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: .5;
-            }
-        }
-
-        .hero {
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #f9fafb;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: #9ca3af;
-            max-width: 600px;
-            margin: 0 auto 2rem;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .section-title {
-            font-size: 1.875rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: #f9fafb;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
         }
 
-        .endpoints {
-            padding: 2rem 0 4rem;
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        .endpoint-card {
+        .manhwa-card {
             background: #111827;
             border: 1px solid #1f2937;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: border-color 0.2s;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .endpoint-card:hover {
-            border-color: #3b82f6;
+        .manhwa-card:hover {
+            border-color: #06b6d4;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2);
         }
 
-        .endpoint-header {
+        .manhwa-card-image {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            background: #1f2937;
+        }
+
+        .manhwa-card-content {
+            padding: 1rem;
+        }
+
+        .manhwa-card-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            color: #f9fafb;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            min-height: 2.5rem;
+        }
+
+        .manhwa-card-episode {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-bottom: 0.25rem;
+        }
+
+        .error {
+            background: #7f1d1d;
+            border: 1px solid #991b1b;
+            color: #fca5a5;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .detail-view {
+            display: none;
+        }
+
+        .detail-view.active {
+            display: block;
+        }
+
+        .detail-header {
             display: flex;
-            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-image {
+            width: 250px;
+            height: 375px;
+            object-fit: cover;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .detail-info {
+            flex: 1;
+        }
+
+        .detail-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-meta {
+            display: flex;
             gap: 1rem;
             margin-bottom: 1rem;
             flex-wrap: wrap;
         }
 
-        .method-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
-            font-family: 'Fira Code', monospace;
+        .meta-item {
             font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .method-get {
-            background: #1e40af;
-            color: #93c5fd;
-        }
-
-        .method-post {
-            background: #065f46;
-            color: #6ee7b7;
-        }
-
-        .endpoint-url {
-            font-family: 'Fira Code', monospace;
-            font-size: 1rem;
-            color: #60a5fa;
-            word-break: break-all;
-        }
-
-        .endpoint-description {
             color: #9ca3af;
-            margin-bottom: 1rem;
-            font-size: 0.9375rem;
         }
 
-        .code-block {
-            background: #0a0e1a;
+        .rating {
+            color: #fbbf24;
+        }
+
+        .detail-synopsis {
+            margin-top: 1rem;
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        .chapter-list-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .chapter-card {
+            background: #1f2937;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chapter-card:hover {
+            background: #374151;
+            transform: translateX(4px);
+        }
+
+        .chapter-title {
+            font-size: 0.875rem;
+            color: #e4e6eb;
+        }
+
+        .chapter-date {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .chapter-view {
+            display: none;
+        }
+
+        .chapter-view.active {
+            display: block;
+        }
+
+        .chapter-info {
+            background: #1f2937;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #06b6d4;
+        }
+
+        .image-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .image-item {
+            background: #111827;
             border: 1px solid #1f2937;
             border-radius: 8px;
             padding: 1rem;
-            position: relative;
-            overflow-x: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .image-item-left {
+            flex: 1;
+        }
+
+        .image-number {
+            font-weight: 600;
+            color: #06b6d4;
+            margin-bottom: 0.25rem;
+        }
+
+        .image-url {
+            font-size: 0.75rem;
+            color: #6b7280;
+            word-break: break-all;
+            font-family: monospace;
         }
 
         .copy-btn {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            background: #1f2937;
-            border: 1px solid #374151;
+            padding: 0.5rem 1rem;
+            background: #374151;
+            border: none;
             color: #9ca3af;
-            padding: 0.375rem 0.75rem;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.75rem;
-            font-weight: 500;
             transition: all 0.2s;
         }
 
         .copy-btn:hover {
+            background: #4b5563;
+            color: #f9fafb;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
             background: #374151;
-            color: #f9fafb;
-        }
-
-        .copy-btn.copied {
-            background: #065f46;
-            border-color: #059669;
-            color: #6ee7b7;
-        }
-
-        pre {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.875rem;
-            line-height: 1.5;
-            overflow-x: auto;
-        }
-
-        code {
-            color: #e4e6eb;
-        }
-
-        .json-key {
-            color: #93c5fd;
-        }
-
-        .json-string {
-            color: #6ee7b7;
-        }
-
-        .json-number {
-            color: #fbbf24;
-        }
-
-        .json-boolean {
-            color: #c084fc;
-        }
-
-        .json-null {
+            border: none;
             color: #9ca3af;
-        }
-
-        .comment {
-            color: #6b7280;
-        }
-
-        footer {
-            background: #111827;
-            border-top: 1px solid #1f2937;
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        footer p {
-            color: #6b7280;
+            border-radius: 6px;
+            cursor: pointer;
             font-size: 0.875rem;
+            transition: all 0.2s;
+            margin-bottom: 1.5rem;
         }
 
-        .footer-title {
+        .back-btn:hover {
+            background: #4b5563;
             color: #f9fafb;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .params {
-            background: #0f1419;
-            border-left: 3px solid #3b82f6;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-        }
-
-        .params h4 {
-            color: #60a5fa;
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .params ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .params li {
-            color: #9ca3af;
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
-            font-family: 'Fira Code', monospace;
-        }
-
-        .params li code {
-            color: #6ee7b7;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.875rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
             .container {
                 padding: 0 1rem;
             }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 1rem;
+            }
+
+            .detail-header {
+                flex-direction: column;
+            }
+
+            .detail-image {
+                width: 100%;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+
+            .chapter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .home-view.hidden,
+        .detail-view.hidden,
+        .chapter-view.hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="header-content">
-                <div class="logo">Manhwaindo API</div>
-                <div class="status-badge">
-                    <span class="status-dot"></span>
-                    <span>API Online</span>
-                </div>
-            </div>
+            <h1 style="font-size: 1.5rem; font-weight: 700; color: #06b6d4;">Manhwaindo API Documentation</h1>
         </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Manhwaindo Scraper API</h1>
-                <p>Fast and reliable API for scraping manhwa data from manhwaindo.app. Access series information, chapters, and images.</p>
+    <main style="padding: 2rem 0;">
+        <div class="container">
+            <!-- Controls -->
+            <div class="controls">
+                <div class="dropdown-wrapper">
+                    <select id="endpointSelect">
+                        <option value="">Pilih Endpoint API</option>
+                        <option value="popular">Popular Manhwa</option>
+                        <option value="lastupdate">Latest Update</option>
+                        <option value="project">Project Update</option>
+                        <option value="series-list">All Series</option>
+                    </select>
+                </div>
+                <input type="text" class="search-input" id="searchInput" placeholder="Cari manhwa (e.g. solo leveling)">
+                <button class="btn" id="fetchBtn" onclick="handleFetch()">Ambil Data</button>
+                <button class="btn" id="searchBtn" onclick="handleSearch()" style="background: #10b981;">Cari</button>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="autoFetch" checked>
+                    <label for="autoFetch">Auto Fetch</label>
+                </div>
             </div>
-        </section>
 
-        <section class="endpoints">
-            <div class="container">
-                <h2 class="section-title">API Endpoints</h2>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api</span>
-                    </div>
-                    <p class="endpoint-description">Get API information and available endpoints</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"message"</span>: <span class="json-string">"Manhwaindo API"</span>,
-  <span class="json-key">"version"</span>: <span class="json-string">"1.0.0"</span>,
-  <span class="json-key">"endpoints"</span>: { ... }
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/project?page=1</span>
-                    </div>
-                    <p class="endpoint-description">Get project updates from homepage</p>
-                    <div class="params">
-                        <h4>Query Parameters:</h4>
-                        <ul>
-                            <li><code>page</code> - Page number (default: 1)</li>
-                        </ul>
-                    </div>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"page"</span>: <span class="json-number">1</span>,
-  <span class="json-key">"data"</span>: [...]
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/lastupdate?page=1</span>
-                    </div>
-                    <p class="endpoint-description">Get latest updates</p>
-                    <div class="params">
-                        <h4>Query Parameters:</h4>
-                        <ul>
-                            <li><code>page</code> - Page number (default: 1)</li>
-                        </ul>
-                    </div>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"page"</span>: <span class="json-number">1</span>,
-  <span class="json-key">"data"</span>: [...]
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/popular</span>
-                    </div>
-                    <p class="endpoint-description">Get popular manhwa series</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"data"</span>: [
-    {
-      <span class="json-key">"title"</span>: <span class="json-string">"Solo Leveling"</span>,
-      <span class="json-key">"slug"</span>: <span class="json-string">"solo-leveling"</span>,
-      <span class="json-key">"rating"</span>: <span class="json-string">"9.5"</span>
-    }
-  ]
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/genres</span>
-                    </div>
-                    <p class="endpoint-description">Get all available genres</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"totalGenres"</span>: <span class="json-number">42</span>,
-  <span class="json-key">"data"</span>: [
-    {
-      <span class="json-key">"id"</span>: <span class="json-string">"action"</span>,
-      <span class="json-key">"name"</span>: <span class="json-string">"Action"</span>
-    }
-  ]
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/series-list?page=1</span>
-                    </div>
-                    <p class="endpoint-description">Get all series with filters</p>
-                    <div class="params">
-                        <h4>Query Parameters:</h4>
-                        <ul>
-                            <li><code>page</code> - Page number (default: 1)</li>
-                            <li><code>order</code> - update | popular | latest | title</li>
-                            <li><code>type</code> - manhwa | manhua | manga</li>
-                            <li><code>status</code> - ongoing | completed | hiatus</li>
-                        </ul>
-                    </div>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Example: /api/series-list?page=1&order=update&type=manhwa</span>
-
-<span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"page"</span>: <span class="json-number">1</span>,
-  <span class="json-key">"filters"</span>: {
-    <span class="json-key">"order"</span>: <span class="json-string">"update"</span>,
-    <span class="json-key">"type"</span>: <span class="json-string">"manhwa"</span>
-  },
-  <span class="json-key">"data"</span>: [...]
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/series/:slug</span>
-                    </div>
-                    <p class="endpoint-description">Get detailed information about a series</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Example: /api/series/solo-leveling</span>
-
-<span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"data"</span>: {
-    <span class="json-key">"title"</span>: <span class="json-string">"Solo Leveling"</span>,
-    <span class="json-key">"slug"</span>: <span class="json-string">"solo-leveling"</span>,
-    <span class="json-key">"status"</span>: <span class="json-string">"Completed"</span>,
-    <span class="json-key">"author"</span>: <span class="json-string">"Chugong"</span>,
-    <span class="json-key">"genres"</span>: [<span class="json-string">"Action"</span>, <span class="json-string">"Fantasy"</span>],
-    <span class="json-key">"chapters"</span>: [...]
-  }
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/chapter/:slug</span>
-                    </div>
-                    <p class="endpoint-description">Get all images for a specific chapter</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Example: /api/chapter/solo-leveling-chapter-1</span>
-
-<span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"data"</span>: {
-    <span class="json-key">"title"</span>: <span class="json-string">"Solo Leveling Chapter 1"</span>,
-    <span class="json-key">"slug"</span>: <span class="json-string">"solo-leveling-chapter-1"</span>,
-    <span class="json-key">"images"</span>: [
-      <span class="json-string">"https://example.com/image1.jpg"</span>,
-      <span class="json-string">"https://example.com/image2.jpg"</span>
-    ],
-    <span class="json-key">"prevChapter"</span>: <span class="json-null">null</span>,
-    <span class="json-key">"nextChapter"</span>: <span class="json-string">"solo-leveling-chapter-2"</span>
-  }
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/search?q=query</span>
-                    </div>
-                    <p class="endpoint-description">Search for manhwa by title</p>
-                    <div class="params">
-                        <h4>Query Parameters:</h4>
-                        <ul>
-                            <li><code>q</code> - Search query (required)</li>
-                        </ul>
-                    </div>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Example: /api/search?q=solo</span>
-
-<span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"query"</span>: <span class="json-string">"solo"</span>,
-  <span class="json-key">"data"</span>: [
-    {
-      <span class="json-key">"title"</span>: <span class="json-string">"Solo Leveling"</span>,
-      <span class="json-key">"slug"</span>: <span class="json-string">"solo-leveling"</span>
-    }
-  ]
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/download/:slug</span>
-                    </div>
-                    <p class="endpoint-description">Get download information for a chapter</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Example: /api/download/solo-leveling-chapter-1</span>
-
-<span class="comment">// Response</span>
-{
-  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
-  <span class="json-key">"data"</span>: {
-    <span class="json-key">"title"</span>: <span class="json-string">"Solo Leveling Chapter 1"</span>,
-    <span class="json-key">"images"</span>: [
-      {
-        <span class="json-key">"url"</span>: <span class="json-string">"https://..."</span>,
-        <span class="json-key">"filename"</span>: <span class="json-string">"001.jpg"</span>
-      }
-    ]
-  }
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-post">POST</span>
-                        <span class="endpoint-url">/api/download-multiple</span>
-                    </div>
-                    <p class="endpoint-description">Download multiple chapters as ZIP</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Request Body</span>
-{
-  <span class="json-key">"slugs"</span>: [
-    <span class="json-string">"solo-leveling-chapter-1"</span>,
-    <span class="json-string">"solo-leveling-chapter-2"</span>
-  ]
-}
-
-<span class="comment">// Response: ZIP file download</span></code></pre>
-                    </div>
-                </div>
-
-                <div class="endpoint-card">
-                    <div class="endpoint-header">
-                        <span class="method-badge method-get">GET</span>
-                        <span class="endpoint-url">/api/download-pdf/:slug</span>
-                    </div>
-                    <p class="endpoint-description">Download chapter as PDF</p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code><span class="comment">// Example: /api/download-pdf/solo-leveling-chapter-1</span>
-
-<span class="comment">// Response: PDF file download</span></code></pre>
-                    </div>
-                </div>
-
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Memuat data...</p>
             </div>
-        </section>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <!-- Home View -->
+            <div id="homeView" class="home-view">
+                <h2 class="section-title" id="resultTitle">Hasil</h2>
+                <div class="card-grid" id="cardGrid"></div>
+            </div>
+
+            <!-- Detail View -->
+            <div id="detailView" class="detail-view">
+                <button class="back-btn" onclick="goBack()">
+                    <span>←</span> Kembali
+                </button>
+                <div id="detailContent"></div>
+            </div>
+
+            <!-- Chapter View -->
+            <div id="chapterView" class="chapter-view">
+                <button class="back-btn" onclick="goBackToDetail()">
+                    <span>←</span> Kembali ke Detail
+                </button>
+                <div id="chapterContent"></div>
+            </div>
+        </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p class="footer-title">Manhwaindo API</p>
-            <p>Built by Ramadhanu - Free and Open Source</p>
-        </div>
-    </footer>
-
     <script>
-        function copyCode(button) {
-            const codeBlock = button.nextElementSibling;
-            const code = codeBlock.textContent;
+        let currentView = 'home';
+        let currentSeriesSlug = null;
+        let currentSeriesTitle = null;
 
-            navigator.clipboard.writeText(code).then(() => {
-                button.textContent = 'Copied!';
-                button.classList.add('copied');
+        const endpointSelect = document.getElementById('endpointSelect');
+        const autoFetchCheckbox = document.getElementById('autoFetch');
+        const searchInput = document.getElementById('searchInput');
 
-                setTimeout(() => {
-                    button.textContent = 'Copy';
-                    button.classList.remove('copied');
-                }, 2000);
+        endpointSelect.addEventListener('change', () => {
+            if (autoFetchCheckbox.checked && endpointSelect.value) {
+                handleFetch();
+            }
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        async function handleFetch() {
+            const endpoint = endpointSelect.value;
+            if (!endpoint) {
+                alert('Pilih endpoint terlebih dahulu');
+                return;
+            }
+
+            const loading = document.getElementById('loading');
+            const cardGrid = document.getElementById('cardGrid');
+            const error = document.getElementById('error');
+            const resultTitle = document.getElementById('resultTitle');
+
+            loading.style.display = 'block';
+            cardGrid.innerHTML = '';
+            error.style.display = 'none';
+            showView('home');
+
+            try {
+                let url = '';
+                let title = '';
+
+                switch(endpoint) {
+                    case 'popular':
+                        url = '/api/popular';
+                        title = 'Sedang Tayang - Popular';
+                        break;
+                    case 'lastupdate':
+                        url = '/api/lastupdate?page=1';
+                        title = 'Sedang Tayang - Latest Update';
+                        break;
+                    case 'project':
+                        url = '/api/project?page=1';
+                        title = 'Sedang Tayang - Project Update';
+                        break;
+                    case 'series-list':
+                        url = '/api/series-list?page=1';
+                        title = 'Sedang Tayang - All Series';
+                        break;
+                }
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                loading.style.display = 'none';
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Gagal memuat data');
+                }
+
+                const items = data.data || [];
+                resultTitle.textContent = title;
+
+                if (items.length === 0) {
+                    cardGrid.innerHTML = '<p style="text-align: center; color: #6b7280;">Tidak ada data</p>';
+                    return;
+                }
+
+                cardGrid.innerHTML = items.map(item => createCard(item)).join('');
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                error.textContent = `Error: ${err.message}`;
+            }
+        }
+
+        async function handleSearch() {
+            const query = searchInput.value.trim();
+            if (!query) {
+                alert('Masukkan kata kunci pencarian');
+                return;
+            }
+
+            const loading = document.getElementById('loading');
+            const cardGrid = document.getElementById('cardGrid');
+            const error = document.getElementById('error');
+            const resultTitle = document.getElementById('resultTitle');
+
+            loading.style.display = 'block';
+            cardGrid.innerHTML = '';
+            error.style.display = 'none';
+            showView('home');
+
+            try {
+                const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+
+                loading.style.display = 'none';
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Gagal mencari data');
+                }
+
+                const items = data.data || [];
+                resultTitle.textContent = `Hasil Pencarian: "${query}"`;
+
+                if (items.length === 0) {
+                    cardGrid.innerHTML = '<p style="text-align: center; color: #6b7280;">Tidak ada hasil</p>';
+                    return;
+                }
+
+                cardGrid.innerHTML = items.map(item => createCard(item)).join('');
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                error.textContent = `Error: ${err.message}`;
+            }
+        }
+
+        function createCard(item) {
+            const title = item.title || 'No Title';
+            const image = item.image || 'https://via.placeholder.com/200x300?text=No+Image';
+            const slug = item.slug || '';
+            const latestChapter = item.latestChapter || (item.chapters && item.chapters[0] ? item.chapters[0].title : '');
+
+            return `
+                <div class="manhwa-card" onclick="showDetail('${slug}')">
+                    <img src="${image}" alt="${title}" class="manhwa-card-image"
+                        onerror="this.src='https://via.placeholder.com/200x300?text=No+Image'">
+                    <div class="manhwa-card-content">
+                        <div class="manhwa-card-title">${title}</div>
+                        ${latestChapter ? `<div class="manhwa-card-episode">${latestChapter}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function showDetail(slug) {
+            if (!slug) return;
+
+            currentSeriesSlug = slug;
+            const loading = document.getElementById('loading');
+            const detailContent = document.getElementById('detailContent');
+            const error = document.getElementById('error');
+
+            showView('detail');
+            loading.style.display = 'block';
+            detailContent.innerHTML = '';
+            error.style.display = 'none';
+
+            try {
+                const response = await fetch(`/api/series/${slug}`);
+                const data = await response.json();
+
+                loading.style.display = 'none';
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Gagal memuat detail');
+                }
+
+                const series = data.data;
+                currentSeriesTitle = series.title;
+
+                detailContent.innerHTML = `
+                    <div class="detail-header">
+                        <img src="${series.image}" alt="${series.title}" class="detail-image"
+                            onerror="this.src='https://via.placeholder.com/250x375?text=No+Image'">
+                        <div class="detail-info">
+                            <h1 class="detail-title">${series.title}</h1>
+                            <div class="detail-meta">
+                                <span class="meta-item">${series.type || 'Unknown'}</span>
+                                <span class="meta-item">•</span>
+                                <span class="meta-item">${series.status || 'Unknown'}</span>
+                                ${series.rating ? `
+                                    <span class="meta-item">•</span>
+                                    <span class="meta-item rating">★ ${series.rating}</span>
+                                ` : ''}
+                            </div>
+                            <p class="detail-synopsis">${series.synopsis || 'No synopsis available'}</p>
+                        </div>
+                    </div>
+
+                    ${series.chapters && series.chapters.length > 0 ? `
+                        <h2 class="chapter-list-title">Daftar Episode (${series.totalChapters || series.chapters.length})</h2>
+                        <div class="chapter-grid">
+                            ${series.chapters.map(ch => `
+                                <div class="chapter-card" onclick="showChapter('${ch.slug}', '${escapeHtml(ch.title)}')">
+                                    <span class="chapter-title">${ch.title}</span>
+                                    ${ch.releaseDate ? `<span class="chapter-date">${ch.releaseDate}</span>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                `;
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                error.textContent = `Error: ${err.message}`;
+            }
+        }
+
+        async function showChapter(chapterSlug, chapterTitle) {
+            if (!chapterSlug) return;
+
+            const loading = document.getElementById('loading');
+            const chapterContent = document.getElementById('chapterContent');
+            const error = document.getElementById('error');
+
+            showView('chapter');
+            loading.style.display = 'block';
+            chapterContent.innerHTML = '';
+            error.style.display = 'none';
+            window.scrollTo(0, 0);
+
+            try {
+                const response = await fetch(`/api/chapter/${chapterSlug}`);
+                const data = await response.json();
+
+                loading.style.display = 'none';
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Gagal memuat chapter');
+                }
+
+                const chapter = data.data;
+
+                chapterContent.innerHTML = `
+                    <div class="chapter-info">
+                        <h3>${chapterTitle}</h3>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">
+                            Series: ${currentSeriesTitle || 'Unknown'}<br>
+                            Total Gambar: ${chapter.images?.length || 0}
+                        </p>
+                    </div>
+
+                    ${chapter.images && chapter.images.length > 0 ? `
+                        <div class="image-list">
+                            ${chapter.images.map((img, idx) => `
+                                <div class="image-item">
+                                    <div class="image-item-left">
+                                        <div class="image-number">Gambar ${idx + 1}</div>
+                                        <div class="image-url">${img}</div>
+                                    </div>
+                                    <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(img)}')">Copy URL</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<p style="text-align: center; color: #6b7280;">Tidak ada gambar</p>'}
+                `;
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                error.textContent = `Error: ${err.message}`;
+            }
+        }
+
+        function showView(view) {
+            currentView = view;
+            document.getElementById('homeView').classList.toggle('hidden', view !== 'home');
+            document.getElementById('detailView').classList.toggle('hidden', view !== 'detail');
+            document.getElementById('chapterView').classList.toggle('hidden', view !== 'chapter');
+        }
+
+        function goBack() {
+            showView('home');
+            window.scrollTo(0, 0);
+        }
+
+        function goBackToDetail() {
+            if (currentSeriesSlug) {
+                showDetail(currentSeriesSlug);
+            } else {
+                goBack();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML.replace(/'/g, "\\'");
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('URL berhasil dicopy!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
             });
         }
     </script>
