@@ -345,12 +345,20 @@ async function scrapeChapter(slug) {
     const images = [];
 
     $("#readerarea img").each((i, elem) => {
-      let imgSrc = $(elem).attr("src") || "";
+      let imgSrc = $(elem).attr("src") || $(elem).attr("data-src") || $(elem).attr("data-lazy-src") || "";
+
       if (imgSrc) {
         // Fix URL format - replace triple slash with double slash
         imgSrc = imgSrc.replace(/^https:\/\/\//, "https://");
         imgSrc = imgSrc.replace(/^http:\/\/\//, "http://");
-        images.push(imgSrc);
+
+        // Fix double protocol (e.g., https://https://)
+        imgSrc = imgSrc.replace(/^https?:\/\/https?:\/\//, "https://");
+
+        // Only add if it's a valid URL
+        if (imgSrc.startsWith("http://") || imgSrc.startsWith("https://")) {
+          images.push(imgSrc);
+        }
       }
     });
 
