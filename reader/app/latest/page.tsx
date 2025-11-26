@@ -1,11 +1,12 @@
 import ManhwaCard from '@/components/ManhwaCard';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://apimanhwa.lnncloud.app/api';
 
 async function getLatest() {
   try {
     const res = await fetch(`${API_URL}/lastupdate`, {
-      next: { revalidate: 600 }
+      next: { revalidate: 600 },
+      cache: 'force-cache'
     });
     if (!res.ok) return { data: [] };
     const data = await res.json();

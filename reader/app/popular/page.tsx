@@ -1,11 +1,12 @@
 import ManhwaCard from '@/components/ManhwaCard';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://apimanhwa.lnncloud.app/api';
 
 async function getPopular() {
   try {
     const res = await fetch(`${API_URL}/popular`, {
-      next: { revalidate: 3600 }
+      next: { revalidate: 3600 },
+      cache: 'force-cache'
     });
     if (!res.ok) return { data: [] };
     const data = await res.json();
