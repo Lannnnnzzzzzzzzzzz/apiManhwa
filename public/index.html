@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manhwaindo API Documentation</title>
+    <title>Manhwaindo API - Interactive Documentation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -38,42 +38,95 @@
             background: #111827;
             border-bottom: 1px solid #1f2937;
             padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        .controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #06b6d4;
+        }
+
+        .subtitle {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-top: 0.25rem;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .section {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 1.5rem;
             margin-bottom: 2rem;
-            flex-wrap: wrap;
         }
 
-        .dropdown-wrapper {
-            flex: 1;
-            min-width: 250px;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #1f2937;
         }
 
-        select {
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f9fafb;
+        }
+
+        .endpoint-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #065f46;
+            color: #6ee7b7;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .endpoint-description {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .params-grid {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .param-row {
+            display: grid;
+            grid-template-columns: 150px 1fr 100px;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .param-label {
+            font-size: 0.875rem;
+            color: #d1d5db;
+            font-weight: 500;
+        }
+
+        .param-input {
             width: 100%;
-            padding: 0.75rem;
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: #e4e6eb;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            cursor: pointer;
-        }
-
-        .search-input {
-            flex: 1;
-            min-width: 250px;
-            padding: 0.75rem;
+            padding: 0.5rem 0.75rem;
             background: #1f2937;
             border: 1px solid #374151;
             color: #e4e6eb;
@@ -81,18 +134,24 @@
             font-size: 0.875rem;
         }
 
-        .search-input::placeholder {
+        .param-input:focus {
+            outline: none;
+            border-color: #06b6d4;
+        }
+
+        .param-input::placeholder {
             color: #6b7280;
         }
 
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1.25rem;
             background: #06b6d4;
             color: #fff;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 500;
+            font-size: 0.875rem;
             transition: all 0.2s;
             white-space: nowrap;
         }
@@ -106,33 +165,73 @@
             cursor: not-allowed;
         }
 
-        .checkbox-wrapper {
+        .response-container {
+            margin-top: 1rem;
+            background: #0a0e1a;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .response-header {
+            background: #1f2937;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .response-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #9ca3af;
+        }
+
+        .copy-json-btn {
+            padding: 0.25rem 0.75rem;
+            background: #374151;
+            color: #9ca3af;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .copy-json-btn:hover {
+            background: #4b5563;
+            color: #f9fafb;
+        }
+
+        .response-body {
+            padding: 1rem;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .json-viewer {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #d1d5db;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .loading-inline {
+            color: #06b6d4;
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            white-space: nowrap;
         }
 
-        .checkbox-wrapper input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: #60a5fa;
-        }
-
-        .spinner {
-            border: 3px solid #1f2937;
-            border-top: 3px solid #06b6d4;
+        .spinner-small {
+            border: 2px solid #1f2937;
+            border-top: 2px solid #06b6d4;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            width: 16px;
+            height: 16px;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
@@ -140,156 +239,96 @@
             100% { transform: rotate(360deg); }
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            margin-top: 2rem;
+        .error-message {
+            background: #7f1d1d;
+            border: 1px solid #991b1b;
+            color: #fca5a5;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .success-message {
+            background: #064e3b;
+            border: 1px solid #065f46;
+            color: #6ee7b7;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
         }
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
         .manhwa-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 8px;
             overflow: hidden;
+            transition: all 0.2s;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .manhwa-card:hover {
             border-color: #06b6d4;
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.15);
         }
 
         .manhwa-card-image {
             width: 100%;
             aspect-ratio: 2/3;
             object-fit: cover;
-            background: #1f2937;
+            background: #374151;
         }
 
         .manhwa-card-content {
-            padding: 1rem;
+            padding: 0.75rem;
         }
 
         .manhwa-card-title {
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
             color: #f9fafb;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            min-height: 2.5rem;
+            min-height: 2.4rem;
         }
 
-        .manhwa-card-episode {
-            font-size: 0.75rem;
+        .manhwa-card-chapter {
+            font-size: 0.7rem;
             color: #9ca3af;
-            margin-bottom: 0.25rem;
+            margin-top: 0.25rem;
         }
 
-        .error {
-            background: #7f1d1d;
-            border: 1px solid #991b1b;
-            color: #fca5a5;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-        }
-
-        .detail-view {
-            display: none;
-        }
-
-        .detail-view.active {
-            display: block;
-        }
-
-        .detail-header {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .detail-image {
-            width: 250px;
-            height: 375px;
-            object-fit: cover;
-            border-radius: 12px;
-            flex-shrink: 0;
-        }
-
-        .detail-info {
-            flex: 1;
-        }
-
-        .detail-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .detail-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .meta-item {
-            font-size: 0.875rem;
-            color: #9ca3af;
-        }
-
-        .rating {
-            color: #fbbf24;
-        }
-
-        .detail-synopsis {
-            margin-top: 1rem;
-            line-height: 1.8;
-            color: #d1d5db;
-        }
-
-        .chapter-list-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .chapter-grid {
+        .chapter-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 3rem;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
-        .chapter-card {
+        .chapter-item {
             background: #1f2937;
             padding: 0.75rem 1rem;
             border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.2s;
+            cursor: pointer;
         }
 
-        .chapter-card:hover {
+        .chapter-item:hover {
             background: #374151;
-            transform: translateX(4px);
         }
 
         .chapter-title {
@@ -302,92 +341,72 @@
             color: #6b7280;
         }
 
-        .chapter-view {
-            display: none;
-        }
-
-        .chapter-view.active {
-            display: block;
-        }
-
-        .chapter-info {
-            background: #1f2937;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .chapter-info h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: #06b6d4;
-        }
-
         .image-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
+            margin-top: 1rem;
         }
 
         .image-item {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            padding: 1rem;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .image-item-left {
-            flex: 1;
+            gap: 1rem;
         }
 
         .image-number {
             font-weight: 600;
             color: #06b6d4;
             margin-bottom: 0.25rem;
+            font-size: 0.875rem;
         }
 
         .image-url {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #6b7280;
             word-break: break-all;
             font-family: monospace;
         }
 
-        .copy-btn {
-            padding: 0.5rem 1rem;
+        .url-display {
+            background: #0a0e1a;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid #1f2937;
+            margin-top: 1rem;
+        }
+
+        .url-text {
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: #06b6d4;
+            word-break: break-all;
+        }
+
+        .quick-test {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .quick-test-btn {
+            padding: 0.4rem 0.75rem;
             background: #374151;
-            border: none;
             color: #9ca3af;
+            border: none;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.75rem;
             transition: all 0.2s;
         }
 
-        .copy-btn:hover {
-            background: #4b5563;
-            color: #f9fafb;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: #374151;
-            border: none;
-            color: #9ca3af;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-            margin-bottom: 1.5rem;
-        }
-
-        .back-btn:hover {
+        .quick-test-btn:hover {
             background: #4b5563;
             color: #f9fafb;
         }
@@ -397,391 +416,473 @@
                 padding: 0 1rem;
             }
 
-            .card-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 1rem;
-            }
-
-            .detail-header {
-                flex-direction: column;
-            }
-
-            .detail-image {
-                width: 100%;
-                max-width: 250px;
-                margin: 0 auto;
-            }
-
-            .chapter-grid {
+            .param-row {
                 grid-template-columns: 1fr;
             }
-        }
 
-        .home-view.hidden,
-        .detail-view.hidden,
-        .chapter-view.hidden {
-            display: none;
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            h1 {
+                font-size: 1.25rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 style="font-size: 1.5rem; font-weight: 700; color: #06b6d4;">Manhwaindo API Documentation</h1>
+            <h1>Manhwaindo API - Interactive Documentation</h1>
+            <p class="subtitle">Test all endpoints directly in your browser</p>
         </div>
     </header>
 
-    <main style="padding: 2rem 0;">
+    <main class="main-content">
         <div class="container">
-            <!-- Controls -->
-            <div class="controls">
-                <div class="dropdown-wrapper">
-                    <select id="endpointSelect">
-                        <option value="">Pilih Endpoint API</option>
-                        <option value="popular">Popular Manhwa</option>
-                        <option value="lastupdate">Latest Update</option>
-                        <option value="project">Project Update</option>
-                        <option value="series-list">All Series</option>
-                    </select>
+
+            <!-- Popular Manhwa -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Popular Manhwa</h2>
+                        <span class="endpoint-badge">GET /api/popular</span>
+                    </div>
                 </div>
-                <input type="text" class="search-input" id="searchInput" placeholder="Cari manhwa (e.g. solo leveling)">
-                <button class="btn" id="fetchBtn" onclick="handleFetch()">Ambil Data</button>
-                <button class="btn" id="searchBtn" onclick="handleSearch()" style="background: #10b981;">Cari</button>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="autoFetch" checked>
-                    <label for="autoFetch">Auto Fetch</label>
+                <p class="endpoint-description">Mengambil daftar manhwa/manga yang sedang populer</p>
+
+                <button class="btn" onclick="testEndpoint('popular')">Test Endpoint</button>
+
+                <div id="response-popular"></div>
+            </div>
+
+            <!-- Latest Update -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Latest Update</h2>
+                        <span class="endpoint-badge">GET /api/lastupdate</span>
+                    </div>
                 </div>
+                <p class="endpoint-description">Mengambil daftar manhwa/manga dengan update terbaru</p>
+
+                <div class="params-grid">
+                    <div class="param-row">
+                        <label class="param-label">Page (optional)</label>
+                        <input type="number" class="param-input" id="lastupdate-page" placeholder="1" value="1" min="1">
+                        <button class="btn" onclick="testEndpoint('lastupdate')">Test</button>
+                    </div>
+                </div>
+
+                <div class="quick-test">
+                    <button class="quick-test-btn" onclick="quickTest('lastupdate', 1)">Page 1</button>
+                    <button class="quick-test-btn" onclick="quickTest('lastupdate', 2)">Page 2</button>
+                    <button class="quick-test-btn" onclick="quickTest('lastupdate', 3)">Page 3</button>
+                </div>
+
+                <div id="response-lastupdate"></div>
             </div>
 
-            <div id="loading" class="loading" style="display: none;">
-                <div class="spinner"></div>
-                <p>Memuat data...</p>
+            <!-- Project Update -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Project Update</h2>
+                        <span class="endpoint-badge">GET /api/project</span>
+                    </div>
+                </div>
+                <p class="endpoint-description">Mengambil daftar project manhwa/manga yang sedang dikerjakan</p>
+
+                <div class="params-grid">
+                    <div class="param-row">
+                        <label class="param-label">Page (optional)</label>
+                        <input type="number" class="param-input" id="project-page" placeholder="1" value="1" min="1">
+                        <button class="btn" onclick="testEndpoint('project')">Test</button>
+                    </div>
+                </div>
+
+                <div class="quick-test">
+                    <button class="quick-test-btn" onclick="quickTest('project', 1)">Page 1</button>
+                    <button class="quick-test-btn" onclick="quickTest('project', 2)">Page 2</button>
+                    <button class="quick-test-btn" onclick="quickTest('project', 3)">Page 3</button>
+                </div>
+
+                <div id="response-project"></div>
             </div>
 
-            <div id="error" class="error" style="display: none;"></div>
+            <!-- Series List -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">All Series</h2>
+                        <span class="endpoint-badge">GET /api/series-list</span>
+                    </div>
+                </div>
+                <p class="endpoint-description">Mengambil daftar semua series manhwa/manga yang tersedia</p>
 
-            <!-- Home View -->
-            <div id="homeView" class="home-view">
-                <h2 class="section-title" id="resultTitle">Hasil</h2>
-                <div class="card-grid" id="cardGrid"></div>
+                <div class="params-grid">
+                    <div class="param-row">
+                        <label class="param-label">Page (optional)</label>
+                        <input type="number" class="param-input" id="series-list-page" placeholder="1" value="1" min="1">
+                        <button class="btn" onclick="testEndpoint('series-list')">Test</button>
+                    </div>
+                </div>
+
+                <div class="quick-test">
+                    <button class="quick-test-btn" onclick="quickTest('series-list', 1)">Page 1</button>
+                    <button class="quick-test-btn" onclick="quickTest('series-list', 2)">Page 2</button>
+                    <button class="quick-test-btn" onclick="quickTest('series-list', 3)">Page 3</button>
+                </div>
+
+                <div id="response-series-list"></div>
             </div>
 
-            <!-- Detail View -->
-            <div id="detailView" class="detail-view">
-                <button class="back-btn" onclick="goBack()">
-                    <span>←</span> Kembali
-                </button>
-                <div id="detailContent"></div>
+            <!-- Search -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Search</h2>
+                        <span class="endpoint-badge">GET /api/search</span>
+                    </div>
+                </div>
+                <p class="endpoint-description">Mencari manhwa/manga berdasarkan kata kunci</p>
+
+                <div class="params-grid">
+                    <div class="param-row">
+                        <label class="param-label">Query (required)</label>
+                        <input type="text" class="param-input" id="search-q" placeholder="solo leveling">
+                        <button class="btn" onclick="testEndpoint('search')">Test</button>
+                    </div>
+                </div>
+
+                <div class="quick-test">
+                    <button class="quick-test-btn" onclick="quickTestSearch('solo leveling')">Solo Leveling</button>
+                    <button class="quick-test-btn" onclick="quickTestSearch('tower of god')">Tower of God</button>
+                    <button class="quick-test-btn" onclick="quickTestSearch('one piece')">One Piece</button>
+                </div>
+
+                <div id="response-search"></div>
             </div>
 
-            <!-- Chapter View -->
-            <div id="chapterView" class="chapter-view">
-                <button class="back-btn" onclick="goBackToDetail()">
-                    <span>←</span> Kembali ke Detail
-                </button>
-                <div id="chapterContent"></div>
+            <!-- Series Detail -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Series Detail</h2>
+                        <span class="endpoint-badge">GET /api/series/:slug</span>
+                    </div>
+                </div>
+                <p class="endpoint-description">Mengambil detail lengkap dari series tertentu beserta daftar chapter</p>
+
+                <div class="params-grid">
+                    <div class="param-row">
+                        <label class="param-label">Slug (required)</label>
+                        <input type="text" class="param-input" id="series-slug" placeholder="solo-leveling">
+                        <button class="btn" onclick="testEndpoint('series')">Test</button>
+                    </div>
+                </div>
+
+                <div class="quick-test">
+                    <button class="quick-test-btn" onclick="quickTestSeries('solo-leveling')">Solo Leveling</button>
+                    <button class="quick-test-btn" onclick="quickTestSeries('tower-of-god')">Tower of God</button>
+                    <button class="quick-test-btn" onclick="quickTestSeries('one-piece')">One Piece</button>
+                </div>
+
+                <div id="response-series"></div>
             </div>
+
+            <!-- Chapter Detail -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Chapter Detail</h2>
+                        <span class="endpoint-badge">GET /api/chapter/:slug</span>
+                    </div>
+                </div>
+                <p class="endpoint-description">Mengambil detail chapter dan URL gambar dari chapter tertentu</p>
+
+                <div class="params-grid">
+                    <div class="param-row">
+                        <label class="param-label">Slug (required)</label>
+                        <input type="text" class="param-input" id="chapter-slug" placeholder="solo-leveling-chapter-1">
+                        <button class="btn" onclick="testEndpoint('chapter')">Test</button>
+                    </div>
+                </div>
+
+                <div class="quick-test">
+                    <button class="quick-test-btn" onclick="quickTestChapter('solo-leveling-chapter-1')">Solo Leveling Ch.1</button>
+                    <button class="quick-test-btn" onclick="quickTestChapter('tower-of-god-chapter-1')">Tower of God Ch.1</button>
+                </div>
+
+                <div id="response-chapter"></div>
+            </div>
+
+            <!-- Download Chapter -->
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Download Chapter</h2>
+                        <span class="endpoint-badge">GET /api/download/:slug</span>
+                    </div>
+                </div>
+                <p class="endpoint-description">Download chapter dalam format ZIP atau PDF</p>
+
+                <div class="params-grid">
+                    <div class="param-row">
+                        <label class="param-label">Slug (required)</label>
+                        <input type="text" class="param-input" id="download-slug" placeholder="solo-leveling-chapter-1">
+                        <button class="btn" onclick="testEndpoint('download')">Get URL</button>
+                    </div>
+                    <div class="param-row">
+                        <label class="param-label">Format</label>
+                        <select class="param-input" id="download-format">
+                            <option value="zip">ZIP</option>
+                            <option value="pdf">PDF</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="response-download"></div>
+            </div>
+
         </div>
     </main>
 
     <script>
-        let currentView = 'home';
-        let currentSeriesSlug = null;
-        let currentSeriesTitle = null;
+        async function testEndpoint(type) {
+            const responseDiv = document.getElementById(`response-${type}`);
 
-        const endpointSelect = document.getElementById('endpointSelect');
-        const autoFetchCheckbox = document.getElementById('autoFetch');
-        const searchInput = document.getElementById('searchInput');
+            let url = '';
+            let params = {};
 
-        endpointSelect.addEventListener('change', () => {
-            if (autoFetchCheckbox.checked && endpointSelect.value) {
-                handleFetch();
+            switch(type) {
+                case 'popular':
+                    url = '/api/popular';
+                    break;
+
+                case 'lastupdate':
+                    const page1 = document.getElementById('lastupdate-page').value;
+                    url = `/api/lastupdate${page1 ? `?page=${page1}` : ''}`;
+                    break;
+
+                case 'project':
+                    const page2 = document.getElementById('project-page').value;
+                    url = `/api/project${page2 ? `?page=${page2}` : ''}`;
+                    break;
+
+                case 'series-list':
+                    const page3 = document.getElementById('series-list-page').value;
+                    url = `/api/series-list${page3 ? `?page=${page3}` : ''}`;
+                    break;
+
+                case 'search':
+                    const query = document.getElementById('search-q').value;
+                    if (!query) {
+                        showError(responseDiv, 'Query parameter is required');
+                        return;
+                    }
+                    url = `/api/search?q=${encodeURIComponent(query)}`;
+                    break;
+
+                case 'series':
+                    const slug = document.getElementById('series-slug').value;
+                    if (!slug) {
+                        showError(responseDiv, 'Slug parameter is required');
+                        return;
+                    }
+                    url = `/api/series/${slug}`;
+                    break;
+
+                case 'chapter':
+                    const chSlug = document.getElementById('chapter-slug').value;
+                    if (!chSlug) {
+                        showError(responseDiv, 'Slug parameter is required');
+                        return;
+                    }
+                    url = `/api/chapter/${chSlug}`;
+                    break;
+
+                case 'download':
+                    const dlSlug = document.getElementById('download-slug').value;
+                    const format = document.getElementById('download-format').value;
+                    if (!dlSlug) {
+                        showError(responseDiv, 'Slug parameter is required');
+                        return;
+                    }
+                    url = `/api/download/${dlSlug}?format=${format}`;
+                    showDownloadUrl(responseDiv, url);
+                    return;
             }
-        });
 
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSearch();
-            }
-        });
-
-        async function handleFetch() {
-            const endpoint = endpointSelect.value;
-            if (!endpoint) {
-                alert('Pilih endpoint terlebih dahulu');
-                return;
-            }
-
-            const loading = document.getElementById('loading');
-            const cardGrid = document.getElementById('cardGrid');
-            const error = document.getElementById('error');
-            const resultTitle = document.getElementById('resultTitle');
-
-            loading.style.display = 'block';
-            cardGrid.innerHTML = '';
-            error.style.display = 'none';
-            showView('home');
+            showLoading(responseDiv);
 
             try {
-                let url = '';
-                let title = '';
-
-                switch(endpoint) {
-                    case 'popular':
-                        url = '/api/popular';
-                        title = 'Sedang Tayang - Popular';
-                        break;
-                    case 'lastupdate':
-                        url = '/api/lastupdate?page=1';
-                        title = 'Sedang Tayang - Latest Update';
-                        break;
-                    case 'project':
-                        url = '/api/project?page=1';
-                        title = 'Sedang Tayang - Project Update';
-                        break;
-                    case 'series-list':
-                        url = '/api/series-list?page=1';
-                        title = 'Sedang Tayang - All Series';
-                        break;
-                }
-
                 const response = await fetch(url);
                 const data = await response.json();
 
-                loading.style.display = 'none';
-
-                if (!data.success) {
-                    throw new Error(data.message || 'Gagal memuat data');
+                if (data.success) {
+                    showSuccess(responseDiv, data, type);
+                } else {
+                    showError(responseDiv, data.message || 'Request failed');
                 }
-
-                const items = data.data || [];
-                resultTitle.textContent = title;
-
-                if (items.length === 0) {
-                    cardGrid.innerHTML = '<p style="text-align: center; color: #6b7280;">Tidak ada data</p>';
-                    return;
-                }
-
-                cardGrid.innerHTML = items.map(item => createCard(item)).join('');
-            } catch (err) {
-                loading.style.display = 'none';
-                error.style.display = 'block';
-                error.textContent = `Error: ${err.message}`;
+            } catch (error) {
+                showError(responseDiv, error.message);
             }
         }
 
-        async function handleSearch() {
-            const query = searchInput.value.trim();
-            if (!query) {
-                alert('Masukkan kata kunci pencarian');
-                return;
-            }
-
-            const loading = document.getElementById('loading');
-            const cardGrid = document.getElementById('cardGrid');
-            const error = document.getElementById('error');
-            const resultTitle = document.getElementById('resultTitle');
-
-            loading.style.display = 'block';
-            cardGrid.innerHTML = '';
-            error.style.display = 'none';
-            showView('home');
-
-            try {
-                const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-                const data = await response.json();
-
-                loading.style.display = 'none';
-
-                if (!data.success) {
-                    throw new Error(data.message || 'Gagal mencari data');
-                }
-
-                const items = data.data || [];
-                resultTitle.textContent = `Hasil Pencarian: "${query}"`;
-
-                if (items.length === 0) {
-                    cardGrid.innerHTML = '<p style="text-align: center; color: #6b7280;">Tidak ada hasil</p>';
-                    return;
-                }
-
-                cardGrid.innerHTML = items.map(item => createCard(item)).join('');
-            } catch (err) {
-                loading.style.display = 'none';
-                error.style.display = 'block';
-                error.textContent = `Error: ${err.message}`;
-            }
+        function quickTest(type, page) {
+            document.getElementById(`${type}-page`).value = page;
+            testEndpoint(type);
         }
 
-        function createCard(item) {
-            const title = item.title || 'No Title';
-            const image = item.image || 'https://via.placeholder.com/200x300?text=No+Image';
-            const slug = item.slug || '';
-            const latestChapter = item.latestChapter || (item.chapters && item.chapters[0] ? item.chapters[0].title : '');
+        function quickTestSearch(query) {
+            document.getElementById('search-q').value = query;
+            testEndpoint('search');
+        }
 
-            return `
-                <div class="manhwa-card" onclick="showDetail('${slug}')">
-                    <img src="${image}" alt="${title}" class="manhwa-card-image"
-                        onerror="this.src='https://via.placeholder.com/200x300?text=No+Image'">
-                    <div class="manhwa-card-content">
-                        <div class="manhwa-card-title">${title}</div>
-                        ${latestChapter ? `<div class="manhwa-card-episode">${latestChapter}</div>` : ''}
-                    </div>
+        function quickTestSeries(slug) {
+            document.getElementById('series-slug').value = slug;
+            testEndpoint('series');
+        }
+
+        function quickTestChapter(slug) {
+            document.getElementById('chapter-slug').value = slug;
+            testEndpoint('chapter');
+        }
+
+        function showLoading(container) {
+            container.innerHTML = `
+                <div class="loading-inline" style="margin-top: 1rem;">
+                    <div class="spinner-small"></div>
+                    <span>Loading...</span>
                 </div>
             `;
         }
 
-        async function showDetail(slug) {
-            if (!slug) return;
+        function showError(container, message) {
+            container.innerHTML = `
+                <div class="error-message">
+                    <strong>Error:</strong> ${message}
+                </div>
+            `;
+        }
 
-            currentSeriesSlug = slug;
-            const loading = document.getElementById('loading');
-            const detailContent = document.getElementById('detailContent');
-            const error = document.getElementById('error');
+        function showSuccess(container, data, type) {
+            let html = '';
 
-            showView('detail');
-            loading.style.display = 'block';
-            detailContent.innerHTML = '';
-            error.style.display = 'none';
-
-            try {
-                const response = await fetch(`/api/series/${slug}`);
-                const data = await response.json();
-
-                loading.style.display = 'none';
-
-                if (!data.success) {
-                    throw new Error(data.message || 'Gagal memuat detail');
-                }
-
-                const series = data.data;
-                currentSeriesTitle = series.title;
-
-                detailContent.innerHTML = `
-                    <div class="detail-header">
-                        <img src="${series.image}" alt="${series.title}" class="detail-image"
-                            onerror="this.src='https://via.placeholder.com/250x375?text=No+Image'">
-                        <div class="detail-info">
-                            <h1 class="detail-title">${series.title}</h1>
-                            <div class="detail-meta">
-                                <span class="meta-item">${series.type || 'Unknown'}</span>
-                                <span class="meta-item">•</span>
-                                <span class="meta-item">${series.status || 'Unknown'}</span>
-                                ${series.rating ? `
-                                    <span class="meta-item">•</span>
-                                    <span class="meta-item rating">★ ${series.rating}</span>
-                                ` : ''}
+            // Visual preview for certain endpoints
+            if (['popular', 'lastupdate', 'project', 'series-list', 'search'].includes(type)) {
+                const items = data.data || [];
+                if (items.length > 0) {
+                    html += '<div class="success-message">✓ Request successful - Showing visual preview + JSON</div>';
+                    html += '<div class="card-grid">';
+                    items.slice(0, 12).forEach(item => {
+                        html += `
+                            <div class="manhwa-card">
+                                <img src="${item.image || 'https://via.placeholder.com/160x240?text=No+Image'}"
+                                     alt="${item.title}"
+                                     class="manhwa-card-image"
+                                     onerror="this.src='https://via.placeholder.com/160x240?text=No+Image'">
+                                <div class="manhwa-card-content">
+                                    <div class="manhwa-card-title">${item.title || 'No Title'}</div>
+                                    ${item.latestChapter ? `<div class="manhwa-card-chapter">${item.latestChapter}</div>` : ''}
+                                </div>
                             </div>
-                            <p class="detail-synopsis">${series.synopsis || 'No synopsis available'}</p>
-                        </div>
-                    </div>
-
-                    ${series.chapters && series.chapters.length > 0 ? `
-                        <h2 class="chapter-list-title">Daftar Episode (${series.totalChapters || series.chapters.length})</h2>
-                        <div class="chapter-grid">
-                            ${series.chapters.map(ch => `
-                                <div class="chapter-card" onclick="showChapter('${ch.slug}', '${escapeHtml(ch.title)}')">
-                                    <span class="chapter-title">${ch.title}</span>
-                                    ${ch.releaseDate ? `<span class="chapter-date">${ch.releaseDate}</span>` : ''}
-                                </div>
-                            `).join('')}
-                        </div>
-                    ` : ''}
-                `;
-            } catch (err) {
-                loading.style.display = 'none';
-                error.style.display = 'block';
-                error.textContent = `Error: ${err.message}`;
-            }
-        }
-
-        async function showChapter(chapterSlug, chapterTitle) {
-            if (!chapterSlug) return;
-
-            const loading = document.getElementById('loading');
-            const chapterContent = document.getElementById('chapterContent');
-            const error = document.getElementById('error');
-
-            showView('chapter');
-            loading.style.display = 'block';
-            chapterContent.innerHTML = '';
-            error.style.display = 'none';
-            window.scrollTo(0, 0);
-
-            try {
-                const response = await fetch(`/api/chapter/${chapterSlug}`);
-                const data = await response.json();
-
-                loading.style.display = 'none';
-
-                if (!data.success) {
-                    throw new Error(data.message || 'Gagal memuat chapter');
+                        `;
+                    });
+                    html += '</div>';
                 }
-
-                const chapter = data.data;
-
-                chapterContent.innerHTML = `
-                    <div class="chapter-info">
-                        <h3>${chapterTitle}</h3>
-                        <p style="color: #9ca3af; font-size: 0.875rem;">
-                            Series: ${currentSeriesTitle || 'Unknown'}<br>
-                            Total Gambar: ${chapter.images?.length || 0}
-                        </p>
-                    </div>
-
-                    ${chapter.images && chapter.images.length > 0 ? `
-                        <div class="image-list">
-                            ${chapter.images.map((img, idx) => `
-                                <div class="image-item">
-                                    <div class="image-item-left">
-                                        <div class="image-number">Gambar ${idx + 1}</div>
-                                        <div class="image-url">${img}</div>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(img)}')">Copy URL</button>
-                                </div>
-                            `).join('')}
+            } else if (type === 'series') {
+                const series = data.data;
+                html += '<div class="success-message">✓ Request successful - Showing series info + chapters</div>';
+                html += `
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <img src="${series.image}" style="width: 200px; height: 300px; object-fit: cover; border-radius: 8px;">
+                            <div>
+                                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">${series.title}</h3>
+                                <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 0.5rem;">
+                                    ${series.type || ''} • ${series.status || ''} ${series.rating ? `• ★ ${series.rating}` : ''}
+                                </p>
+                                <p style="color: #d1d5db; font-size: 0.875rem;">${series.synopsis || ''}</p>
+                            </div>
                         </div>
-                    ` : '<p style="text-align: center; color: #6b7280;">Tidak ada gambar</p>'}
+                        ${series.chapters && series.chapters.length > 0 ? `
+                            <h4 style="margin-bottom: 0.75rem; color: #f9fafb;">Chapters (${series.totalChapters || series.chapters.length})</h4>
+                            <div class="chapter-list">
+                                ${series.chapters.slice(0, 10).map(ch => `
+                                    <div class="chapter-item">
+                                        <span class="chapter-title">${ch.title}</span>
+                                        ${ch.releaseDate ? `<span class="chapter-date">${ch.releaseDate}</span>` : ''}
+                                    </div>
+                                `).join('')}
+                                ${series.chapters.length > 10 ? `<p style="text-align: center; color: #6b7280; margin-top: 0.5rem;">... and ${series.chapters.length - 10} more chapters</p>` : ''}
+                            </div>
+                        ` : ''}
+                    </div>
                 `;
-            } catch (err) {
-                loading.style.display = 'none';
-                error.style.display = 'block';
-                error.textContent = `Error: ${err.message}`;
+            } else if (type === 'chapter') {
+                const chapter = data.data;
+                html += '<div class="success-message">✓ Request successful - Showing image URLs</div>';
+                if (chapter.images && chapter.images.length > 0) {
+                    html += '<div class="image-list">';
+                    chapter.images.forEach((img, idx) => {
+                        html += `
+                            <div class="image-item">
+                                <div>
+                                    <div class="image-number">Image ${idx + 1}</div>
+                                    <div class="image-url">${img}</div>
+                                </div>
+                                <button class="copy-json-btn" onclick="copyText('${img.replace(/'/g, "\\'")}')">Copy</button>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
             }
+
+            // JSON Response
+            html += `
+                <div class="response-container" style="margin-top: 1rem;">
+                    <div class="response-header">
+                        <span class="response-title">JSON Response</span>
+                        <button class="copy-json-btn" onclick="copyJSON(${JSON.stringify(JSON.stringify(data))})">Copy JSON</button>
+                    </div>
+                    <div class="response-body">
+                        <pre class="json-viewer">${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
         }
 
-        function showView(view) {
-            currentView = view;
-            document.getElementById('homeView').classList.toggle('hidden', view !== 'home');
-            document.getElementById('detailView').classList.toggle('hidden', view !== 'detail');
-            document.getElementById('chapterView').classList.toggle('hidden', view !== 'chapter');
+        function showDownloadUrl(container, url) {
+            const fullUrl = window.location.origin + url;
+            container.innerHTML = `
+                <div class="success-message">✓ Download URL generated</div>
+                <div class="url-display">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="font-size: 0.875rem; color: #9ca3af; font-weight: 600;">Download URL:</span>
+                        <button class="copy-json-btn" onclick="copyText('${fullUrl}')">Copy URL</button>
+                    </div>
+                    <div class="url-text">${fullUrl}</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.875rem; color: #9ca3af;">
+                    Click the URL above or paste it in a new tab to start the download
+                </p>
+            `;
         }
 
-        function goBack() {
-            showView('home');
-            window.scrollTo(0, 0);
+        function copyJSON(jsonString) {
+            navigator.clipboard.writeText(jsonString).then(() => {
+                alert('JSON copied to clipboard!');
+            });
         }
 
-        function goBackToDetail() {
-            if (currentSeriesSlug) {
-                showDetail(currentSeriesSlug);
-            } else {
-                goBack();
-            }
-            window.scrollTo(0, 0);
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML.replace(/'/g, "\\'");
-        }
-
-        function copyToClipboard(text) {
+        function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('URL berhasil dicopy!');
-            }).catch(err => {
-                console.error('Failed to copy:', err);
+                alert('Copied to clipboard!');
             });
         }
     </script>
