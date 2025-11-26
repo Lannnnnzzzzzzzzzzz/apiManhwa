@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #00a1d6;
+  --primary-dark: #0082b3;
+  --primary-light: #33b5e5;
+  --secondary: #fb7299;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f5f7;
+  --bg-hover: #e7e8eb;
+  --text-primary: #18191c;
+  --text-secondary: #61666d;
+  --text-tertiary: #9499a0;
+  --border-color: #e3e5e7;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-hover: var(--bg-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border: var(--border-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
