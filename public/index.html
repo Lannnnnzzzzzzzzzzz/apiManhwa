@@ -427,33 +427,21 @@
         }
 
         .image-list {
-            display: grid;
-            gap: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 100%;
         }
 
         .image-item {
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            padding: 0.75rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
+            width: 100%;
+            display: block;
         }
 
-        .image-number {
-            font-weight: 600;
-            color: #06b6d4;
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .image-url {
-            font-size: 0.7rem;
-            color: #64748b;
-            word-break: break-all;
-            font-family: monospace;
+        .image-preview {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .series-detail {
@@ -1027,11 +1015,10 @@
                     chapter.images.forEach((img, idx) => {
                         html += `
                             <div class="image-item">
-                                <div>
-                                    <div class="image-number">Image ${idx + 1}</div>
-                                    <div class="image-url">${img}</div>
-                                </div>
-                                <button class="copy-btn" onclick="copyText('${img.replace(/'/g, "\\'")}')">Copy</button>
+                                <img src="${img}"
+                                     alt="Page ${idx + 1}"
+                                     class="image-preview"
+                                     loading="lazy">
                             </div>
                         `;
                     });
