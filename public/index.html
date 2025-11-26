@@ -1018,7 +1018,8 @@
                                 <img src="${img}"
                                      alt="Page ${idx + 1}"
                                      class="image-preview"
-                                     loading="lazy">
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/800x1200/1e293b/06b6d4?text=Page+${idx + 1}+Failed+to+Load';">
                             </div>
                         `;
                     });
